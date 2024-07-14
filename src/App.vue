@@ -1,47 +1,77 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="container">
+    <div class="left_block"></div>
+    <div class="right_block">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="footer"></div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style scoped lang="scss">
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  .left_block {
+    width: calc(28% - 12px);
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
+  .right_block {
+    width: calc(72% - 12px);
     display: flex;
-    place-items: flex-start;
     flex-wrap: wrap;
+    overflow: hidden;
+
+    .cell {
+      width: calc(20% + 1px);
+      height: calc(20% + 1px);
+      background: #262626;
+      border: solid #4D4D4D;
+      border-width: 1px 0 0 1px;
+      margin-left: -1px;
+      margin-top: -1px;
+    }
+  }
+
+  .left_block, .right_block {
+    border: solid 1px #4D4D4D;
+    border-radius: 12px;
+    height: calc(100vh - 160px);
+  }
+
+  .footer {
+    width: 100%;
+    height: 72px;
+    border: solid 1px #4D4D4D;
+    border-radius: 12px;
   }
 }
 </style>
