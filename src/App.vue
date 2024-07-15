@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Block from './components/Block.vue'
-import type { BlockInterface } from './interfaces';
+import TextSkeleton from './components/TextSkeleton.vue'
+import type { BlockInterface, ImagesInterface } from './interfaces';
 
 const blocks = ref<BlockInterface[]>([
   {
@@ -24,6 +25,16 @@ const blocks = ref<BlockInterface[]>([
   }
 ])
 const activeBlock = ref<BlockInterface | null>(null);
+const drawerOpen = ref(false)
+const images = ref<Partial<ImagesInterface>>({})
+
+const loadImages = async () => {
+  const green = (await import(`./assets/images/green_block.png`)).default;
+  const yellow = (await import(`./assets/images/yellow_block.png`)).default;
+  const blue = (await import(`./assets/images/blue_block.png`)).default;
+  
+  images.value = { green, yellow, blue }
+};
 
 const drop = (e: any) => {
   const cell = e.target.closest('.cell');
@@ -35,15 +46,26 @@ const drop = (e: any) => {
   }
 }
 
-const getBlock = (cell_id: number) => blocks.value.find((block: BlockInterface) => block.cell_id === cell_id)
+const getBlock = (cell_id: number) => {
+  const block: BlockInterface | undefined = blocks.value.find((block: BlockInterface) => block.cell_id === cell_id)
+  if (!block) return null
+  block['image'] = images.value[block.color]
+  return block
+}
 
 const selectBlock = (block: BlockInterface) => {
   if (activeBlock.value?.id === block.id) {
-    activeBlock.value = null
+    drawerOpen.value = false
+    setTimeout(() => activeBlock.value = null, 300)
   } else {
+    drawerOpen.value = true
     activeBlock.value = block
   }
 }
+
+onMounted(() => {
+    loadImages();
+});
 
 </script>
 
@@ -51,16 +73,14 @@ const selectBlock = (block: BlockInterface) => {
   <div class="container">
     <div class="left_block">
       <img src="./assets/images/img_blur.png" alt="">
-      <span class="left_block__header"></span>
-      <div class="left_block__paragraph">
-        <span v-for="i in 6" :key="i"></span>
-      </div>
+      <TextSkeleton />
     </div>
     <div class="right_block">
       <div 
         v-for="cell_id in 50"
         :key="cell_id"
         class="cell"
+        :class="{ 'active': activeBlock?.cell_id === cell_id }"
         :data-cell-id="`${cell_id}`"
         @dragover.prevent
         @dragenter.prevent
@@ -68,8 +88,11 @@ const selectBlock = (block: BlockInterface) => {
       >
         <Block :block="getBlock(cell_id)" @select-block="selectBlock"/>
       </div>
-      <div class="block_drawer" :class="{ 'active': activeBlock }">
-        <img src="./assets/images/green_block.png" alt="">
+      <div class="block_drawer" :class="{ 'active': drawerOpen }">
+        <img :src="activeBlock?.image" alt="">
+        <hr>
+        <TextSkeleton />
+        <hr>
       </div>
     </div>
     <div class="footer">
@@ -99,48 +122,6 @@ const selectBlock = (block: BlockInterface) => {
       width: 100%;
       border-radius: 8px;
     }
-
-    &__header {
-      width: 80%;
-      height: 26px;
-      border-radius: 8px;
-      margin-top: 20px;
-      background: linear-gradient(90deg, #3C3C3C, #444444, #333333);
-    }
-
-    &__paragraph {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 24px;
-      gap: 16px;
-      span {
-        height: 10px;
-        border-radius: 4px;
-        background: linear-gradient(90deg, #3C3C3C, #444444, #333333);
-
-        &:first-child {
-          width: 75%;
-        }
-        &:nth-child(2) {
-          width: 90%;
-        }
-        &:nth-child(3) {
-          width: 82%;
-        }
-        &:nth-child(4) {
-          width: 77%;
-        }
-        &:nth-child(5) {
-          width: 69%;
-        }
-        &:nth-child(6) {
-          width: 44%;
-          margin-top: 8px;
-        }
-      }
-    }
   }
   .right_block {
     width: calc(72% - 12px);
@@ -162,6 +143,10 @@ const selectBlock = (block: BlockInterface) => {
       justify-content: center;
       position: relative;
       cursor: pointer;
+
+      &.active {
+        background: #2F2F2F;
+      }
     }
     .block_drawer {
       width: 50%;
@@ -175,7 +160,15 @@ const selectBlock = (block: BlockInterface) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 55px 15px 18px;
+      padding: 55px 15px 18px 15px;
+
+      hr {
+        width: 100%;
+        height: 1px;
+        border: none;
+        border-top: solid 1px #4D4D4D !important;
+        margin-top: 30px;
+      }
 
       img {
         width: 130px;

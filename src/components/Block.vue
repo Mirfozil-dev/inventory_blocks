@@ -1,27 +1,15 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted } from 'vue';
-import type { BlockInterface, ImagesInterface } from '../interfaces';
+import { defineProps} from 'vue';
+import type { BlockInterface } from '../interfaces';
 
 const props = defineProps<{
-  block?: BlockInterface
+  block: BlockInterface | null
 }>()
 const emits = defineEmits(['selectBlock'])
-const images = ref<Partial<ImagesInterface>>({})
-const loadImages = async () => {
-  const green = (await import(`../assets/images/green_block.png`)).default;
-  const yellow = (await import(`../assets/images/yellow_block.png`)).default;
-  const blue = (await import(`../assets/images/blue_block.png`)).default;
-  
-  images.value = { green, yellow, blue }
-};
 
 const dragStart = (e: any) => {
   e.dataTransfer.setData('block_id', e.target.getAttribute('data-block-id'));
 }
-
-onMounted(() => {
-    loadImages();
-});
 
 </script>
 <template>
@@ -33,7 +21,7 @@ onMounted(() => {
               draggable
               @dragstart="e => dragStart(e)"
               @dragover.prevent
-              :src="images[block.color]" alt=""
+              :src="block.image" alt=""
               @click="$emit('selectBlock', block)"
             >
             <div class="cell__counter">

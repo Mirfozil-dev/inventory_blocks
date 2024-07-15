@@ -8,4 +8,5 @@ export interface BlockInterface {
     count: number;
     cell_id: number;
     color: keyof ImagesInterface;
-  }
+    image?: string
+} 
