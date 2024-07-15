@@ -10,8 +10,8 @@ const emits = defineEmits(['selectBlock'])
 const dragStart = (e: any) => {
   e.dataTransfer.setData('block_id', e.target.getAttribute('data-block-id'));
 }
-
 </script>
+
 <template>
     <template
             v-if="block"
@@ -32,6 +32,9 @@ const dragStart = (e: any) => {
 
 
 <style scoped>
+img {
+  cursor: pointer;
+}
 .cell__counter {
     font-family: 'Inter', sans-serif;
     border: solid 1px #4D4D4D;
