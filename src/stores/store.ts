@@ -6,19 +6,19 @@ export const useBlocksStore = defineStore('blocks', () => {
     const blocks = ref<BlockInterface[]>([
       {
         id: 1,
-        count: 1,
+        count: 4,
         cell_id: 1,
         color: 'green'
       },
       {
         id: 2,
-        count: 3,
+        count: 2,
         cell_id: 2,
         color: 'yellow'
       },
       {
         id: 3,
-        count: 4,
+        count: 5,
         cell_id: 3,
         color: 'blue'
       }
