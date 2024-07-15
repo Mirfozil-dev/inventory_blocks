@@ -12,12 +12,13 @@ import TextSkeleton from '../components/TextSkeleton.vue'
 <style scoped lang="scss">
 .left_content {
     width: calc(28% - 12px);
-    background: #262626;
+    background: var(--secondary-color);
+    transition: all .3s ease;
     padding: 18px 14px 24px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 1px #4D4D4D;
+    border: solid 1px var(--primary-color);
     border-radius: 12px;
     height: calc(100vh - 160px);
 

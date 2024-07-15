@@ -10,7 +10,8 @@
     height: 26px;
     border-radius: 8px;
     margin-top: 20px;
-    background: linear-gradient(90deg, #3C3C3C, #444444, #333333);
+    background: linear-gradient(90deg, var(--gradient-color));
+    animation: pulse 2s infinite ease-in-out;
 }
 
 .paragraph {
@@ -23,8 +24,8 @@
     span {
     height: 10px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #3C3C3C, #444444, #333333);
-
+    background: linear-gradient(90deg, var(--gradient-color));
+    animation: pulse 2s infinite ease-in-out;
     &:first-child {
         width: 75%;
     }
@@ -45,5 +46,16 @@
         margin-top: 8px;
     }
     }
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

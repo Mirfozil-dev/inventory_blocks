@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
     <div class="right_content">
       <div 
-        v-for="cell_id in 50"
+        v-for="cell_id in 25"
         :key="cell_id"
         class="cell"
         :class="{ 'active': store.activeBlock?.cell_id === cell_id }"
@@ -49,31 +49,32 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .right_content {
-    width: calc(72% - 12px);
+  width: calc(72% - 12px);
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+  border: solid 1px var(--primary-color);
+  border-radius: 12px;
+  height: calc(100vh - 160px);
+
+  .cell {
+    width: calc(20% + 1px);
+    height: calc(20% + 1px);
+    transition: all .3s ease;
+    background: var(--secondary-color);
+    border: solid var(--primary-color);
+    border-width: 1px 0 0 1px;
+    margin-left: -1px;
+    margin-top: -1px;
     display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    border: solid 1px #4D4D4D;
-    border-radius: 12px;
-    height: calc(100vh - 160px);
 
-    .cell {
-      width: calc(20% + 1px);
-      height: calc(20% + 1px);
-      background: #262626;
-      border: solid #4D4D4D;
-      border-width: 1px 0 0 1px;
-      margin-left: -1px;
-      margin-top: -1px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-
-      &.active {
-        background: #2F2F2F;
-      }
+    &.active {
+      background: var(--active-color);
     }
+  }
 }
 </style>

@@ -13,7 +13,7 @@ import CancelButton from './CancelButton.vue'
 .bottom_content {
     width: 100%;
     height: 72px;
-    border: solid 1px #4D4D4D;
+    border: solid 1px var(--primary-color);
     border-radius: 12px;
     display: flex;
     padding: 18px;
@@ -23,7 +23,19 @@ import CancelButton from './CancelButton.vue'
       width: 89%;
       height: 36px;
       border-radius: 12px;
-      background: linear-gradient(90deg, #3C3C3C, #444444, #333333);
+      background: linear-gradient(90deg, var(--gradient-color));
+      animation: pulse 2s infinite ease-in-out;
     }
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

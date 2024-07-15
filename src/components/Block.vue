@@ -13,21 +13,21 @@ const dragStart = (e: any) => {
 </script>
 
 <template>
-    <template
-            v-if="block"
-        >
-            <img
-              :data-block-id="block?.id"
-              draggable
-              @dragstart="e => dragStart(e)"
-              @dragover.prevent
-              :src="block.image" alt=""
-              @click="$emit('selectBlock', block)"
-            >
-            <div class="cell__counter">
-            {{ block?.count }}
-            </div>
-        </template>
+  <template
+      v-if="block"
+  >
+      <img
+        :data-block-id="block?.id"
+        draggable
+        @dragstart="e => dragStart(e)"
+        @dragover.prevent
+        :src="block.image" alt=""
+        @click="$emit('selectBlock', block)"
+      >
+      <div class="cell__counter">
+      {{ block?.count }}
+      </div>
+  </template>
 </template>
 
 

@@ -4,7 +4,20 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #1D1D1D;
-    padding: 32px;
+.dark-theme {
+--primary-color: #4D4D4D;
+--secondary-color: #262626;
+--active-color: #2F2F2F;
+--background-color: #1D1D1D;
+--text-color: #dcdcdc;
+--gradient-color: #3C3C3C, #444444, #333333;
+}
+
+.light-theme {
+--primary-color: #495464;
+--secondary-color: #E8E8E8;
+--active-color: #F4F4F2;
+--background-color: #ffffff;
+--text-color: #2d2d2d;
+--gradient-color: #b7b7b7, #c7c7c7, #d7d7d7;
 }

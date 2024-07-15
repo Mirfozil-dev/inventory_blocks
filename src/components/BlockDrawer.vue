@@ -38,7 +38,7 @@ const deleteInput = computed({
     right: -1px;
     transform: translateX(100%);
     transition: transform 0.3s;
-    border: solid 1px #4D4D4D;
+    border: solid 1px var(--primary-color);
     height: 100%;
     position: absolute;
     overflow: hidden;
@@ -51,7 +51,7 @@ const deleteInput = computed({
     width: 100%;
     height: 1px;
     border: none;
-    border-top: solid 1px #4D4D4D !important;
+    border-top: solid 1px var(--primary-color) !important;
     margin-top: 30px;
     }
 
@@ -69,13 +69,13 @@ const deleteInput = computed({
     input {
     width: 100%;
     height: 33px;
-    border: 1px solid #4D4D4D;
-    background: #262626;
+    border: 1px solid var(--primary-color);
+    background: var(--secondary-color);
     border-radius: 4px;
     padding: 0 10px;
     margin-top: 20px;
     outline: none;
-    color: #dcdcdc;
+    color: var(--text-color);
     }
 
     &__confirm {

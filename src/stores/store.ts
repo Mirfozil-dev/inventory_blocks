@@ -1,8 +1,14 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { BlockInterface, ImagesInterface } from '../interfaces';
 
 export const useBlocksStore = defineStore('blocks', () => {
+    const themes = {
+      light: 'light-theme',
+      dark: 'dark-theme'
+    };
+  
+    const currentTheme = ref(themes.dark);
     const blocks = ref<BlockInterface[]>([
       {
         id: 1,
@@ -27,6 +33,10 @@ export const useBlocksStore = defineStore('blocks', () => {
     const drawerOpen = ref(false)
     const isDeleting = ref(false)
     const deleteInput = ref('')
+
+    const toggleTheme = () => {
+      currentTheme.value = currentTheme.value === themes.light ? themes.dark : themes.light;
+    };
 
     const drop = (e: any) => {
       const cell = e.target.closest('.cell');
@@ -76,11 +86,14 @@ export const useBlocksStore = defineStore('blocks', () => {
       drawerOpen,
       isDeleting,
       deleteInput,
+      currentTheme,
+      themes,
       drop,
       setIsDeleting,
       setDeleteInput,
       closeBlockDrawer,
       selectBlock,
-      deleteBlock
+      deleteBlock,
+      toggleTheme
     }
 }, {persist: true})
